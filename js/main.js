@@ -75,7 +75,7 @@ const countTime = () => {
         lineWidth -= 0.1;
         document.body.querySelector(".line").style.width = lineWidth + "%";
     } else if (lineWidth <= 0) {
-        showQuestion();
+        showAnswer();
     }
 }
 
