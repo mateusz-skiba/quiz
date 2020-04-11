@@ -1,0 +1,253 @@
+$smallerView: "only screen and (max-width : 1100px)";
+$mobileView: "only screen and (max-width : 650px)";
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+
+    .timer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 30px;
+        background: rgb(133, 133, 255);
+
+        .line {
+            z-index: 1;
+            width: 100%;
+            height: 30px;
+            background: rgb(106, 106, 204);
+        }
+    }
+
+    .question {
+        height: 50vh;
+        width: 100%;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+
+        h1 {
+            text-align: center;
+            margin-top: 15vh;
+            color: #444;
+            font-size: 2.4rem;
+            padding: 0 10px;
+
+            @media #{$mobileView} {
+                font-size: 2rem;
+                margin-top: 17vh;
+            }
+        }
+    }
+
+    .nextBox {
+        height: 10vh;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-pack: end;
+        justify-content: flex-end;
+        -webkit-box-align: end;
+        align-items: flex-end;
+        margin: 0 40px;
+
+        @media #{$mobileView} {
+            margin: 0;
+        }
+
+        .col-md-6,
+        .col-lg-3 {
+            height: 100%;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: end;
+            justify-content: flex-end;
+            -webkit-box-align: end;
+            align-items: flex-end;
+
+            @media #{$mobileView} {
+                padding: 0 7px;
+            }
+
+            .nextBtn {
+                text-align: center;
+                height: 80%;
+                width: 100%;
+                background: gold;
+                border: none;
+                border-radius: 25px;
+                border-bottom: 7px solid rgb(196, 192, 0);
+                color: #fff;
+                font-size: 1.5rem;
+                font-weight: 500;
+                -webkit-transition: .3s;
+                transition: .3s;
+                display: none;
+
+                &:hover {
+                    border-bottom: none;
+                    cursor: pointer;
+                }
+
+                @media #{$smallerView} {
+                    margin-bottom: 25px;
+                }
+
+                @media #{$mobileView} {
+                    font-size: 1rem;
+                    border-bottom: 4px solid rgb(196, 192, 0);
+                    height: 70%;
+                }
+            }
+        }
+    }
+
+    .answersBox {
+        height: 40vh;
+        margin: 0 40px;
+
+        @media #{$mobileView} {
+            margin: 0;
+        }
+
+        .col-md-6,
+        .col-lg-3 {
+            height: 100%;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+
+            @media #{$smallerView} {
+                height: 45%;
+            }
+
+            @media #{$mobileView} {
+                padding: 0 7px;
+            }
+
+            .answer {
+                text-align: center;
+                display: -webkit-box;
+                display: flex;
+                -webkit-box-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                align-items: center;
+                height: 80%;
+                width: 100%;
+                background: rgb(133, 133, 255);
+                border-radius: 25px;
+                border-bottom: 10px solid rgb(106, 106, 204);
+                color: #fff;
+                font-size: 1.3rem;
+                -webkit-transition: .3s;
+                transition: .3s;
+
+                @media #{$smallerView} {
+                    height: 100%;
+                }
+
+                @media #{$mobileView} {
+                    font-size: 0.9rem;
+                    border-radius: 15px;
+                    border-bottom: 5px solid rgb(106, 106, 204);
+                }
+
+                &:hover {
+                    border-bottom: none;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .scoreBox {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+
+        .score {
+            width: 50%;
+            height: 50%;
+            background: #ffd700;
+            box-shadow: 15px 15px 0px 0px #bf9700;
+            position: absolute;
+            top: 0;
+            left: 0;
+            -webkit-transform: translate(50%, 50%);
+            transform: translate(50%, 50%);
+            -webkit-box-align: center;
+            align-items: center;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            align-self: center;
+            display: none;
+            margin: auto;
+            text-align: center;
+
+            @media #{$mobileView} {
+                width: 90%;
+                height: 40%;
+                -webkit-transform: translate(5%, 60%);
+                transform: translate(5%, 60%);
+                box-shadow: 8px 8px 0px 0px #bf9700;
+            }
+
+            .scoreTitle {
+                height: 100%;
+                text-align: center;
+                color: #fff;
+                display: -webkit-box;
+                display: flex;
+                text-align: center;
+                -webkit-box-align: center;
+                align-items: center;
+
+                @media #{$mobileView} {
+                    font-size: 1.5rem;
+                    margin-top: 0px;
+                    height: 80%;
+                }
+            }
+
+            .return {
+                display: -webkit-box;
+                display: flex;
+                color: white;
+                font-size: 1.5rem;
+                width: 40%;
+                height: 45px;
+                background: rgb(133, 133, 255);
+                border: none;
+                box-shadow: 7px 7px 0px 0px rgb(106, 106, 204);
+                margin: auto;
+                display: block;
+                margin-bottom: 30px;
+                bottom: 0px;
+
+                @media #{$mobileView} {
+                    width: 40%;
+                    height: 35px;
+                    margin-bottom: 25px;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+}
