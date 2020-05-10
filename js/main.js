@@ -2,7 +2,7 @@ const answers = document.body.querySelectorAll(".answer");
 let number = 0; // number of question
 let score = 0; // number of right answers
 let lineWidth = 100; // width of timer line
-let checkSelection = "true"; // check if the answer is selected
+let checkSelection = false; // check if the answer is selected
 
 const questions = [
     {
@@ -53,18 +53,18 @@ const questions = [
 ]
 
 const loadAnswer = () => {
-    document.querySelector("h1").textContent = questions[number].ask;
-    document.querySelector(".first").textContent = questions[number].answers[0].text;
-    document.querySelector(".first").dataset.correct = questions[number].answers[0].correct;
-
-    document.querySelector(".second").textContent = questions[number].answers[1].text;
-    document.querySelector(".second").dataset.correct = questions[number].answers[1].correct;
-
-    document.querySelector(".third").textContent = questions[number].answers[2].text;
-    document.querySelector(".third").dataset.correct = questions[number].answers[2].correct;
-
-    document.querySelector(".fourth").textContent = questions[number].answers[3].text;
-    document.querySelector(".fourth").dataset.correct = questions[number].answers[3].correct;
+        document.querySelector("h1").textContent = questions[number].ask;
+        document.querySelector(".first").textContent = questions[number].answers[0].text;
+        document.querySelector(".first").dataset.correct = questions[number].answers[0].correct;
+    
+        document.querySelector(".second").textContent = questions[number].answers[1].text;
+        document.querySelector(".second").dataset.correct = questions[number].answers[1].correct;
+    
+        document.querySelector(".third").textContent = questions[number].answers[2].text;
+        document.querySelector(".third").dataset.correct = questions[number].answers[2].correct;
+    
+        document.querySelector(".fourth").textContent = questions[number].answers[3].text;
+        document.querySelector(".fourth").dataset.correct = questions[number].answers[3].correct;
 }
 
 loadAnswer();
@@ -86,7 +86,7 @@ const showAnswer = (e) => {
 
     clearInterval(timer);
 
-    if (checkSelection == "true") {
+    if (checkSelection == false) {
         number += 1;
     }
 
@@ -94,20 +94,20 @@ const showAnswer = (e) => {
         document.body.querySelector(".nextBtn").textContent = "Zakończ"
     }
 
-    if (checkSelection == "true") {
+    if (checkSelection == false) {
         document.body.querySelector(".nextBtn").style.display = "block";
         answers.forEach(answer => answer.style.borderBottom = "none");
         answers.forEach(answer => answer.style.background = "red");
     }
 
-    if (checkSelection == "true" && lineWidth >= 0) {
+    if (checkSelection == false && lineWidth >= 0) {
         e.target.style.border = "4px solid black";
         if (e.target.dataset.correct == "true") {
             score += 1;
         }
     }
 
-    checkSelection = "false";
+    checkSelection = true;
 
     // show right answer
     if (questions[number - 1].answers[0].correct == "true") {
@@ -124,7 +124,7 @@ const showAnswer = (e) => {
 
 // after click next button
 const nextQuestion = () => {
-    checkSelection = "true";
+    checkSelection = false;
     lineWidth = 100;
 
     timer = setInterval(countTime, 10);
@@ -134,7 +134,9 @@ const nextQuestion = () => {
     answers.forEach(answer => answer.style.borderBottom = "10px solid rgb(106, 106, 204)");
     answers.forEach(answer => answer.style.background = "rgb(133, 133, 255)");
 
-    loadAnswer();
+    if (document.body.querySelector(".nextBtn").textContent == "Następne >") {
+        loadAnswer();
+    }
 }
 
 // show score after finish quiz
@@ -145,6 +147,7 @@ const showScore = () => {
         document.body.querySelector(".scoreTitle").innerHTML = `Gratulacje!</br>Twój wynik to ${score}/5`;
 
         number = 0;
+        score = 0;
 
         document.body.querySelector(".nextBtn").style.display = "none";
         answers.forEach(answer => answer.style.border = "none");
@@ -153,6 +156,20 @@ const showScore = () => {
 
         clearInterval(timer);
 
+    }
+}
+
+// hide border on hover
+const hideBorder = (e) => {
+    if (checkSelection == false) {
+    e.target.style.border = "none";
+    }
+}
+
+// hide border on leave mouse
+const showBorder = (e) => {
+    if (checkSelection == false) {
+    e.target.style.borderBottom = "10px solid rgb(106, 106, 204)";
     }
 }
 
@@ -170,4 +187,6 @@ const restart = () => {
 answers.forEach(answer => answer.addEventListener("click", showAnswer))
 document.body.querySelector(".nextBtn").addEventListener("click", nextQuestion)
 document.body.querySelector(".nextBtn").addEventListener("click", showScore)
+answers.forEach(answer => answer.addEventListener("mouseover", hideBorder))
+answers.forEach(answer => answer.addEventListener("mouseout", showBorder))
 document.body.querySelector(".return").addEventListener("click", restart)
